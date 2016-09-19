@@ -1,4 +1,6 @@
 @echo off
+SetLocal EnableDelayedExpansion
+
 set drive=%~d1
 set drive=%drive:~0,1%
 set path=%~p1
@@ -7,7 +9,9 @@ set path=%~p1
 call set path=%%path:\=/%%
 
 :: Convert drive to lowercase
-for %%i in ("A=a" "B=b" "C=c" "D=d" "E=e" "F=f" "G=g" "H=h" "I=i" "J=j" "K=k" "L=l" "M=m" "N=n" "O=o" "P=p" "Q=q" "R=r" "S=s" "T=t" "U=u" "V=v" "W=w" "X=x" "Y=y" "Z=z") do call set "drive=%%drive:%%~i%%"
+for %%i in (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z) do (
+	set drive=!drive:%%i=%%i%!
+)
 
 :: The new path is this
 set path="/mnt/%drive%%path%%~n1%~x1"
